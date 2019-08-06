@@ -1,14 +1,9 @@
-
-use std::env;
-
-use minigrep::Config;
-
 fn main() {
     // Collect command line arguments.
-    let args: Vec<String> = env::args().collect();
+    let args: Vec<String> = std::env::args().collect();
 
     // Parse command line arguments.
-    let config = Config::new(&args).unwrap_or_else(|err| {
+    let config = minigrep::Config::new(&args).unwrap_or_else(|err| {
         eprintln!("{}", err);
         eprintln!("Usage: {} `needle` `haystack.txt`", args[0]);
         std::process::exit(1);
