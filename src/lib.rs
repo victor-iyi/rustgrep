@@ -25,7 +25,7 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
   // Read file contents.
   let haystack: String = fs::read_to_string(&config.filename)?;
 
-  let found = search(&config.query, &haystack);
+  let found: Vec<&str> = search(&config.query, &haystack);
   for (i, f) in found.iter().enumerate() {
     println!("Found {} - {}", i + 1, f);
   }
@@ -46,6 +46,17 @@ pub fn search<'a>(needle: &'a str, haystack: &'a str) -> Vec<&'a str> {
 #[cfg(test)]
 mod tests {
   use super::*;
+
+  #[test]
+  fn search_zero() {
+    let needle = "foo";
+    let haystack = "\
+Rust:
+safe, fast, productive.
+Pick three.";
+    let empty: Vec<&str> = Vec::new();
+    assert_eq!(empty, search(needle, haystack));
+  }
 
   #[test]
   fn search_one() {
