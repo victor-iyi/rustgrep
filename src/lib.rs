@@ -26,21 +26,21 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
   let haystack: String = fs::read_to_string(&config.filename)?;
 
   let found = search(&config.query, &haystack);
-  for f in &found {
-    println!("Found: {}", f);
+  for (i, f) in found.iter().enumerate() {
+    println!("Found {} - {}", i + 1, f);
   }
 
   Ok(())
 }
 
 pub fn search<'a>(needle: &'a str, haystack: &'a str) -> Vec<&'a str> {
-  let mut results: Vec<&str> = Vec::new();
-  for line in haystack.lines() {
-    if line.contains(needle) {
-      results.push(line);
-    }
-  }
-  results
+  // An iterator over each lines in haystack,
+  // filter those whose line contains needle,
+  // and collect them into a vector of str.
+  haystack
+    .lines()
+    .filter(|line| line.contains(needle))
+    .collect()
 }
 
 #[cfg(test)]
