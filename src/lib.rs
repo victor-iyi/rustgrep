@@ -47,38 +47,29 @@ pub fn search<'a>(needle: &'a str, haystack: &'a str) -> Vec<&'a str> {
 mod tests {
   use super::*;
 
+  // Haystack text to search for testing purposes.
+  const HAYSTACK: &'static str = "\
+I'm nobody! Who are you?
+Are you nobody, too?
+Then there's a pair of us - don't tell!
+They'd banish us, you know.";
+
   #[test]
   fn search_zero() {
-    let needle = "foo";
-    let haystack = "\
-Rust:
-safe, fast, productive.
-Pick three.";
     let empty: Vec<&str> = Vec::new();
-    assert_eq!(empty, search(needle, haystack));
+    assert_eq!(empty, search("foo", HAYSTACK));
   }
 
   #[test]
   fn search_one() {
-    let needle = "duct";
-    let haystack = "\
-Rust:
-safe, fast, productive.
-Pick three.";
-    assert_eq!(vec!["safe, fast, productive."], search(needle, haystack));
+    assert_eq!(vec!["I'm nobody! Who are you?"], search("I'm", HAYSTACK));
   }
 
   #[test]
   fn search_two() {
-    let needle = "st";
-    let haystack = "\
-Rust:
-safe, fast, productive.
-Pick three.
-    ";
     assert_eq!(
-      vec!["Rust:", "safe, fast, productive."],
-      search(needle, haystack)
+      vec!["I'm nobody! Who are you?", "Are you nobody, too?"],
+      search("nobody", HAYSTACK)
     );
   }
 }
