@@ -48,7 +48,7 @@ mod tests {
   use super::*;
 
   // Haystack text to search for testing purposes.
-  const HAYSTACK: &'static str = "\
+  const HAYSTACK: &str = "\
 I'm nobody! Who are you?
 Are you nobody, too?
 Then there's a pair of us - don't tell!
