@@ -1,10 +1,10 @@
 [package]
-name = "minigrep"
+name = "rustgrep"
 version = "0.1.0"
 authors = ["Victor I. Afolabi <javafolabi@gmail.com>"]
 edition = "2018"
 
 [lib]
-name = "minigrep"
+name = "rustgrep"
 
 [dependencies]
